@@ -10,8 +10,14 @@ run curl -L -b "oraclelicense=a" \
     -o jdk.rpm \
     && yum -y install jdk.rpm \
     && rm jdk.rpm
+COPY maven/libssoJNI.txt staffware/libssoJNI.txt
+ENV JAVA_HOME /usr/java/latest
+ENV LD_LIBRARY_PATH $HOME/staffware/libssoJNI.txt
+ENV PATH $LD_LIBRARY_PATH:$PATH
+
 ENV JAVA_VENDOR=Oracle
 USER 185
 
 
 CMD ["/opt/eap/bin/openshift-launch.sh"]
+

@@ -3,7 +3,7 @@
     <groupId>org.guido4f.images</groupId>
     <artifactId>OpenShift-JBossEAP-OracleJDK</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-
+    <!--<packaging>pom</packaging>-->
     <build>
         <plugins>
             <plugin>
@@ -19,10 +19,22 @@
                         <configuration>
                             <images>
                                 <image>
-                                    <name>guidof/eap64-openshift-oraclejdk8</name>
+                                    <name>guidof/%a-jdk8:%v</name>
                                     <build>
-                                        <dockerFileDir>jdk8</dockerFileDir>
 
+                                        <tags>
+                                            <tag>latest</tag>
+                                        </tags>
+                                        <dockerFileDir>jdk8</dockerFileDir>
+                                        <assembly>
+                                            <mode>dir</mode>
+                                            <targetDir></targetDir>
+                                            <inline>
+                                                <file>
+                                                    <source>src/main/resources/libssoJNI.txt</source>
+                                                </file>
+                                            </inline>
+                                        </assembly>
                                     </build>
                                 </image>
                             </images>
